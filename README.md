@@ -2,6 +2,7 @@
 
 **Acessar Dashboard GraphyQl**
 <p>Criar e testar Queries e Mutations</p>
+
 ```
 http://127.0.0.1:8080/graphql
 ```
@@ -53,10 +54,11 @@ pnpm i --filter @api_graphql/server
 pnpm --filter @api_graphql/server run start
 ```
 
-**Instalação do Apollo Server para o GraphiQL**
+**Instalação do Apollo Server para o GraphQL**
 ```
 pnpm i apollo-server-express --filter @api_graphql/server
 ```
+
 -------------------------------------------------------------------------------
 
 **Instalação do Express**
@@ -67,6 +69,7 @@ pnpm i express --filter @api_graphql/server
 **Lidar com a politica CORS**
 <p>A politica cors não permite que aplicações externas acesse o servidor.</p>
 <p>Desta forma é necessário adicionar uma permissão para que aplicações externas possam acessar o servidor.</p>
+
 ```
 pnpm i cors --filter @api_graphql/server
 ```
