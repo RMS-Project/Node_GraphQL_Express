@@ -17,6 +17,8 @@ export const typeDefs = gql`
 `
 export const resolvers = {
   Query: {
+    // Pode ser assíncrono para esperar o retorno de um banco de dados.
+    // Ex: // Ex: demands: async () => [],
     demands: () => [],
   }
 };

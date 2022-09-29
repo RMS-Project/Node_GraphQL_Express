@@ -6,6 +6,10 @@
 ```
 http://127.0.0.1:8080/graphql
 ```
+**Gerador de grande volume de dados para teste**
+```
+https://www.mockaroo.com/
+```
 
 **nodemon -r esm .**
 <p>nodemon - Checks if project files have changed by restarting Node.</p>
@@ -114,3 +118,10 @@ pnpm i react-router-dom --filter @api_graphql/web
 ```
 npm i graphql-tag
 ```
+
+-------------------------------------------------------------------------------
+<h3>VSCode</h3>
+<p>Formatar os dados rapidamente:</p>
+<p>F1 + Digite: Format Document (Forced)</p>
+
+17-8:00
