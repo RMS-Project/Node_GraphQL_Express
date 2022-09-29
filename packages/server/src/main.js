@@ -7,36 +7,19 @@ import {
   ApolloServerPluginLandingPageLocalDefault,
 } from 'apollo-server-core'
 
+// Importação das gqls.
+import typeDefs from './graphql/typeDefs'
+import resolvers from './graphql/resolvers'
+
 // ---------------------- Server Apollo com Express ----------------------
-async function startApolloServer(typeDefs, resolvers) {
+async function startApolloServer() {
   // Instância do Express
   const app = express()
   const httpServer = http.createServer(app)
   // Instância do Apollo Server 
   const server = new ApolloServer({
-      /* Criação dos Graphs */
-      typeDefs: gql`
-        # Types - São entidades
-        # ! - Preenchimento obrigatório.
-        type Client {
-          id: ID!
-          name: String!
-        }
-
-        type Demand {
-          id: ID!
-          name: String!
-          client: Client!
-          deadline: String
-        }
-
-        # Lista de demandas obrigatório.
-        # Más pode estar vazia.
-        # Para ser obrigatório ter demandas ex: demands: [Demand!]!
-        type Query {
-          demands: [Demand]!
-        }
-      `,
+    typeDefs,
+    resolvers,
     csrfPrevention: true,
     cache: 'bounded',
     plugins: [
@@ -52,7 +35,9 @@ async function startApolloServer(typeDefs, resolvers) {
     app, 
     cors: {
       origin: 'http://localhost:3000',
-    }
+    },
+    // Para o GraphQL interpretar JSON.
+    bodyParseConfig: true
   })
 
   // Configuração de interface (porta) para alterar configurações via 

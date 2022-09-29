@@ -109,3 +109,8 @@ pnpm --filter @api_graphql/web run start
 ```
 pnpm i react-router-dom --filter @api_graphql/web
 ```
+<p>Obs:Caso não esteja utilizando uma implementação do apollo server é possível importar utilizando uma biblioteca chamada graphQl Tag. Ela utiliza o mesmo GQL</p>
+
+```
+npm i graphql-tag
+```
