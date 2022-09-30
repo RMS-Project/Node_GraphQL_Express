@@ -124,4 +124,32 @@ npm i graphql-tag
 <p>Formatar os dados rapidamente:</p>
 <p>F1 + Digite: Format Document (Forced)</p>
 
-17-8:00
+17-14:47
+
+-------------------------------------------------------------------------------
+<h3>Consultas</h3>
+<p>URL</p>
+
+```
+http://127.0.0.1:8080/graphql
+```
+
+```
+query GET_CLIENT($clientID: ID, $clientId: ID!) {
+  client(id: $clientId) {
+    id
+    name
+    email
+    disabled
+  }
+}
+
+```
+
+<p>Valor das variáveis</p>
+
+```
+{
+  "clientId": "37e29d14-e20a-4d92-ac29-abe92dfe10ac"
+}
+```
