@@ -124,8 +124,6 @@ npm i graphql-tag
 <p>Formatar os dados rapidamente:</p>
 <p>F1 + Digite: Format Document (Forced)</p>
 
-17-14:47
-
 -------------------------------------------------------------------------------
 <h3>Consultas</h3>
 <p>URL</p>
@@ -135,12 +133,33 @@ http://127.0.0.1:8080/graphql
 ```
 
 ```
-query GET_CLIENT($clientID: ID, $clientId: ID!) {
+# Fragmento - Criar um agrupamento de atributos para reutilizar nas consultas.
+fragment CLIENT_FRAGMENT on Client {
+  name
+  email
+}
+
+query GET_CLIENT($clientId: ID!) {
+  # Dados de um determinado Cliente.
   client(id: $clientId) {
     id
-    name
-    email
+    ...CLIENT_FRAGMENT
     disabled
+  }
+ 
+  # Lista com paginação que retorna o ID dos Clientes.
+  clients(options: {
+    skip: 10,
+    take: 15,
+    sort: {
+      sorter: "name",
+      sortment: ASC
+    }
+  }){
+    items {
+      ...CLIENT_FRAGMENT
+    }
+    totalItems
   }
 }
 
@@ -153,3 +172,5 @@ query GET_CLIENT($clientID: ID, $clientId: ID!) {
   "clientId": "37e29d14-e20a-4d92-ac29-abe92dfe10ac"
 }
 ```
+
+18 - 26:08
