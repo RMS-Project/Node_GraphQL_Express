@@ -1,4 +1,8 @@
+// Importa apenas a função gql.
 import { gql } from 'apollo-server-express'
+// * - Importa todas as funções.
+import * as uuid from 'uuid'
+
 import createRepository from '../../io/Database/createRepository'
 import { ListSortmentEnum  } from '../List/List'
 
@@ -51,6 +55,14 @@ export const typeDefs = gql`
     clients(options: ClientListOptions): ClientList
   }
 
+  input CreateClientInput {
+    name: String!
+    email: String!
+  }
+
+  extend type Mutation {
+    createClient(input: CreateClientInput!): Client!
+  }
 `
 
 export const resolvers = {
@@ -116,6 +128,7 @@ export const resolvers = {
           if (client[field] === null || client[field] === undefined)
             return false
           if (typeof value === 'string') {
+            // % - Qualquer coisa antes ou qualquer coisa depois.
             if (value.startsWith('%') && value.endsWith('%'))
               return client[field].includes(value.substr(1, value.length - 2))
             if (value.startsWith('%'))
@@ -135,6 +148,24 @@ export const resolvers = {
         items: filteredClients.slice(skip, skip + take),
         totalItems: filteredClients.length,
       }
+    },
+  },
+
+  Mutation: {
+    createClient: async (_, { input }) => {
+      const clients = await clientRepository.read()
+
+      const client = {
+        id: uuid.v4(),
+        name: input.name,
+        email: input.email,
+        disabled: false
+      }
+
+      // Escrever todos os clientes mais este que está sendo criado.
+      await clientRepository.write([...client, client])
+
+      return client
     }
   }
 }

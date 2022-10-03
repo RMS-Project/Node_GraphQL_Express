@@ -77,6 +77,13 @@ pnpm i express --filter @api_graphql/server
 ```
 pnpm i cors --filter @api_graphql/server
 ```
+
+**Criar UUID**
+<p>Que gera IDs para a criação de novos clientes.</p>
+
+```
+pnpm i uuid --filter @api_graphql/server
+```
 -------------------------------------------------------------------------------
 
 <h2>React package</h2>
@@ -132,8 +139,10 @@ npm i graphql-tag
 http://127.0.0.1:8080/graphql
 ```
 
+**Queries de Teste**
+
 ```
-# Fragmento - Criar um agrupamento de atributos para reutilizar nas consultas.
+# Fragmemnto - Criar um agrupamento de atributos para reutizar nas consultas.
 fragment CLIENT_FRAGMENT on Client {
   name
   email
@@ -149,15 +158,24 @@ query GET_CLIENT($clientId: ID!) {
  
   # Lista com paginação que retorna o ID dos Clientes.
   clients(options: {
-    skip: 10,
-    take: 15,
+    skip: 0,
+    take: 10,
     sort: {
-      sorter: "name",
+      sorter: "disabled",
       sortment: ASC
+    },
+    filter: {
+      # Por nome de cliente
+      #name: "%Waly%"
+      #name: "Waly Skinner"
+
+      # Por estado - ativo ou não
+      disabled: true
     }
   }){
     items {
       ...CLIENT_FRAGMENT
+      disabled
     }
     totalItems
   }
@@ -173,4 +191,19 @@ query GET_CLIENT($clientId: ID!) {
 }
 ```
 
-18 - 26:08
+**Mutations de teste**
+```
+mutation {
+  createClient(input: {
+    name: "Rodrigo M S",
+    email: "rms@localhost.com"
+  }) {
+    # Retorno
+    id
+    name
+    email
+    disabled
+  }
+}
+```
+Aula 19 - Não está adicionando no arquivo client.json

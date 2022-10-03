@@ -15,7 +15,8 @@ function createRepository(name) {
 
   return {
     read: () =>
-      // A Promise recebe um callback que resolve esta promise.
+      // A Promise recebe um callback que resolve esta promise
+      // e retorna dados.
       new Promise((resolve, reject) => {
         readFile(path, (error, data) => {
           if (error) {
@@ -28,6 +29,8 @@ function createRepository(name) {
       }),
 
     write: (data) =>
+      // A Promise recebe um callback que resolve esta promise
+      // e retorna dados.
       new Promise((resolve, reject) => {
         writeFile(path, JSON.stringify(data), (error) => {
           if (error) {
