@@ -192,6 +192,9 @@ query GET_CLIENT($clientId: ID!) {
 ```
 
 **Mutations de teste**
+
+<p>Cria um novo cliente</p>
+
 ```
 mutation {
   createClient(input: {
@@ -206,4 +209,22 @@ mutation {
   }
 }
 ```
-Aula 19 - Não está adicionando no arquivo client.json
+
+<p>Atualiza os dados de cliente</p>
+
+```
+mutation {
+  updateClient(input: {
+    id: "a36e9e8a-a9c5-4675-a692-9ddb8dde911f"
+    name: "Rodrigo M S",
+    email: "rodrigoms@localhost.com"
+  }) {
+    # Retorno
+    id
+    name
+    email
+    disabled
+  }
+}
+```
+Aula 20 - 6:30

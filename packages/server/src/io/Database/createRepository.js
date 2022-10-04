@@ -3,7 +3,7 @@
 
 // fs - Biblioteca para sistema de arquivos.
 // readFile - Le arquivos de forma assíncrona.
-import { readFile } from 'fs'
+import { readFile, writeFile } from 'fs'
 
 // path - Lida com caminhos de arquivos
 // revolve - Obtém o caminho relativo.

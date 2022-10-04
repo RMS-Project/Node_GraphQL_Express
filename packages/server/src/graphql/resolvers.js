@@ -12,7 +12,7 @@ const resolvers = {
 
   Query: {
     ...clientResolvers.Query,
-    ...demandResolvers.Query,
+    ...demandResolvers.Query
   },
 
   Mutation: {
