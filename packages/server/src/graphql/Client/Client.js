@@ -216,10 +216,14 @@ export const resolvers = {
     deleteClient: async (_, { id }) => {
       const clients = await clientRepository.read()
 
+      // find - Retorna o primeiro elemento que satisfaz a condição.
+      // Neste caso o id do cliente deve ser idêntico ao id do input.
       const client = clients.find((client) => client.id === id)
 
+      // Se não existir o id, para a execução.
       if (!client) throw new Error(`Cannot delete client with id "${id}"`)
 
+      // Dodos os dados que não tiverem o id informado não serão excluídos.
       const updatedClients = clients.filter((client) => client.id !== id)
 
       await clientRepository.write(updatedClients)
@@ -227,6 +231,7 @@ export const resolvers = {
       return client
     },
 
+    // Habilitar um cliente.
     enableClient: async (_, { id }) => {
       const clients = await clientRepository.read()
 
@@ -252,6 +257,7 @@ export const resolvers = {
       return updatedClient
     },
 
+    // Desabilitar um cliente.
     disableClient: async (_, { id }) => {
       const clients = await clientRepository.read()
 

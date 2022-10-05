@@ -210,7 +210,7 @@ mutation {
 }
 ```
 
-<p>Atualiza os dados de cliente</p>
+<p>Atualiza os dados do cliente</p>
 
 ```
 mutation {
@@ -227,4 +227,36 @@ mutation {
   }
 }
 ```
-Aula 20 - 6:30
+
+<p>Deletar dados do cliente</p>
+
+```
+mutation {
+  deleteClient(id: "a36e9e8a-a9c5-4675-a692-9ddb8dde911f") {
+    id
+    name
+    email
+    disabled
+  }
+}
+```
+<p>Habilitar e desabilitar um cliente</p>
+
+```
+fragment CLIENT_FRAGMENT on Client {
+  id
+  name
+  email
+  disabled
+}
+
+mutation {
+  disableClient(id: "121080bd-627b-403b-93f3-d24c01ff915c") {
+    ...CLIENT_FRAGMENT
+  }
+
+  #enableClient(id: "121080bd-627b-403b-93f3-d24c01ff915c") {
+  #  ...CLIENT_FRAGMENT
+  #}
+}
+```
