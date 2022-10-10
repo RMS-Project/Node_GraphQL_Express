@@ -126,6 +126,11 @@ pnpm i react-router-dom --filter @api_graphql/web
 npm i graphql-tag
 ```
 
+**Instalação do Apollo Link**
+```
+pnpm i apollo-link apollo-link-context apollo-link-error apollo-link-http --filter @api_graphql/web
+```
+
 -------------------------------------------------------------------------------
 <h3>VSCode</h3>
 <p>Formatar os dados rapidamente:</p>
@@ -260,3 +265,5 @@ mutation {
   #}
 }
 ```
+
+23 - 00:00
