@@ -1,14 +1,30 @@
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloClient } from 'apollo-client'
 
-import link from './link';
+// Cache para o Apollo.
+import { InMemoryCache } from 'apollo-cache-inmemory'
 
-const cache = new InMemoryCache();
+import link from './link'
+
+// Muito utilizado para trocar nomes de atributos.
+// Alterando o comportamento do Apollo e como ele vai lidar com isso.
+const cache = new InMemoryCache()
 
 const client = new ApolloClient({
   link,
   cache,
-  connectToDevTools: true,
-});
 
-export default client;
+  // Em produção definir um flag tipo:
+  //connectToDevTools: process.env // Que seja diferente de production
+
+  // Em desenvolvimento deixar apenas true.
+  connectToDevTools: true,
+})
+
+// Aqui já é possível implementar as queries.
+/*client.query({
+  query: gql``,
+  variables: {},
+  error: {}
+})*/
+
+export default client

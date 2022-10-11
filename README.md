@@ -131,6 +131,11 @@ npm i graphql-tag
 pnpm i apollo-link apollo-link-context apollo-link-error apollo-link-http --filter @api_graphql/web
 ```
 
+**Instalar Apollo Client**
+```
+pnpm i apollo-client graphql graphql-tag react-apollo apollo-cache-inmemory --filter @api_graphql/web
+```
+
 -------------------------------------------------------------------------------
 <h3>VSCode</h3>
 <p>Formatar os dados rapidamente:</p>

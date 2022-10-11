@@ -34,7 +34,7 @@ async function startApolloServer() {
   server.applyMiddleware({ 
     app, 
     cors: {
-      origin: 'http://localhost:3000',
+      origin: 'http://localhost:3000/',
     },
     // Para o GraphQL interpretar JSON.
     bodyParseConfig: true
@@ -51,7 +51,7 @@ async function startApolloServer() {
 
   // Executa o servidor.
   await new Promise(resolve => httpServer.listen({ port: PORT }, resolve))
-  console.log(`🚀 Server ready at http://${HOSTNAME}${PORT}${server.graphqlPath}`)
+  console.log(`🚀 Server ready at http://${HOSTNAME}:${PORT}${server.graphqlPath}`)
 }
 
 startApolloServer()

@@ -17,7 +17,7 @@ const loggerLink = new ApolloLink(
     // Necessário criar um observable e ele terá uma função callback. 
     new Observable((observer) => {
       // forward - Que chama a operação que vai passar para frente ( Executar a 
-      //           póxima chamada ).
+      //           próxima chamada ).
       const subscription = forward(operation).subscribe({
 
         // Vai retornar os dados da API.
@@ -79,7 +79,7 @@ const link = ApolloLink.from([
   // Lista Fim - Para ter um link que usa fetch.
   createHttpLink({
     // URI do servidor GraphQL.
-    uri: 'http://127.0.0.1:8000/graphql',
+    uri: 'http://127.0.0.1:8080/graphql',
     
     // fetch padrão do Javascript, não sendo necessário configurar pois já é o
     // padrão do GraphQL podendo ser utilizado o atributo fetch para definir uma
