@@ -34,7 +34,9 @@ async function startApolloServer() {
   server.applyMiddleware({ 
     app, 
     cors: {
-      origin: 'http://localhost:3000/',
+      origin: 'http://127.0.0.1:3000' || 'http://localhost:3000',
+      credentials: true,
+      //csrfPrevention: false
     },
     // Para o GraphQL interpretar JSON.
     bodyParseConfig: true

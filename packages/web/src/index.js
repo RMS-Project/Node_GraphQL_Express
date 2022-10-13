@@ -8,6 +8,9 @@ import reportWebVitals from './reportWebVitals'
 import client from './plugins/apollo/client'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
+
+// ApolloProvider - Encapsula e permite que todo o contexto permita consumir os 
+// dados. Que recebe uma instância do apollo client. 
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>

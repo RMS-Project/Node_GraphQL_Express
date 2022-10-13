@@ -16,6 +16,7 @@ const loggerLink = new ApolloLink(
   (operation, forward) =>
     // Necessário criar um observable e ele terá uma função callback. 
     new Observable((observer) => {
+      // Observador
       // forward - Que chama a operação que vai passar para frente ( Executar a 
       //           próxima chamada ).
       const subscription = forward(operation).subscribe({
@@ -36,6 +37,7 @@ const loggerLink = new ApolloLink(
         complete: observer.complete.bind(observer),
       })
 
+      // Para a subscription de observar.
       return () => subscription.unsubscribe()
     })
 )
