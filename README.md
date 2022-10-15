@@ -275,3 +275,4 @@ mutation {
 
 Ver
 https://dev.to/mensonones/consumindo-api-graphql-usando-react-e-apollo-client-4blo
+https://www.youtube.com/watch?v=FK6S13uw9U0

@@ -1,13 +1,12 @@
 import React from "react"
-import gql from "graphql-tag"
+//import gql from "graphql-tag"
 
-//import gql from "@graphql/client"
-
+import { gql, useQuery } from "@apollo/client"
+//import { useQuery } from "react-apollo"
 
 // Wrapper component com render próprio do React.
 // Pode ser que já esteja obsoleto, pois hoje existe os Hooks.
 // Este é do próprio apollo.
-import { useQuery } from "react-apollo"
 
 // Grapho de consulta.
 const GET_CLIENT_LIST = gql`

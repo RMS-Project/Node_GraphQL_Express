@@ -1,7 +1,9 @@
-import { ApolloLink, Observable } from 'apollo-link'
+import { ApolloLink, Observable, createHttpLink } from '@apollo/client'
+
+//import { ApolloLink, Observable } from "apollo-link"
 
 // Link fim
-import { createHttpLink } from 'apollo-link-http'
+//import { createHttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
 
 // Evolução da aplicação - Utilizar um cabeçalho JWT

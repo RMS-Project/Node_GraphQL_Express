@@ -1,4 +1,4 @@
-import { ApolloClient } from 'apollo-client'
+import { ApolloClient } from "@apollo/client"
 
 // Cache para o Apollo.
 import { InMemoryCache } from 'apollo-cache-inmemory'
