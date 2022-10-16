@@ -1,11 +1,15 @@
-import React from "react"
-import { Link} from "react-router-dom";
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
 
-import logo from '../logo.svg';
-import '../App.css';
-import { ClientList } from "../components/ClientList";
+import logo from '../logo.svg'
+import '../App.css'
+import { ClientList } from "../components/ClientList"
+import { ClientEdit } from "../components/ClientEdit"
 
 export default function Home() {
+  // Guarda o Id do cliente quando houver click.
+  const [clientId, setClientId] = useState()
+
   return (
     <main className="App-div">
 
@@ -21,7 +25,8 @@ export default function Home() {
         </Link>
       </section>
 
-      <ClientList />
+      <ClientList onSelectClient={setClientId}/>
+      <ClientEdit clientId={clientId} />
 
     </main>
   )

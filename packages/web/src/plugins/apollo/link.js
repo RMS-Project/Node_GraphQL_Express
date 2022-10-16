@@ -39,7 +39,7 @@ const loggerLink = new ApolloLink(
         complete: observer.complete.bind(observer),
       })
 
-      // Para a subscription de observar.
+      // Serve para parar a subscription de observar.
       return () => subscription.unsubscribe()
     })
 )

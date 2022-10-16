@@ -1,8 +1,8 @@
 import React from "react"
-//import gql from "graphql-tag"
+// import gql from "graphql-tag"
 
 import { gql, useQuery } from "@apollo/client"
-//import { useQuery } from "react-apollo"
+// import { useQuery } from "react-apollo"
 
 // Wrapper component com render próprio do React.
 // Pode ser que já esteja obsoleto, pois hoje existe os Hooks.
@@ -10,8 +10,9 @@ import { gql, useQuery } from "@apollo/client"
 
 // Grapho de consulta.
 const GET_CLIENT_LIST = gql`
-  query GET_CLIENT_LIST {
-    clients {
+  ## $skip: Int!, $take: Int! -  Faz o controle de paginação.
+  query GET_CLIENT_LIST($skip: Int!, $take: Int!) {
+    clients(options: { skip: $skip, take: $take }) {
       items {
         id
         name
@@ -21,7 +22,7 @@ const GET_CLIENT_LIST = gql`
     }
   }
 `
-
+// Quantidade de dados a ser retornado por página.
 const PAGE_SIZE = 10
 
 export function ClientList({ onSelectClient }) {
@@ -43,7 +44,14 @@ export function ClientList({ onSelectClient }) {
     //refetch,
 
     // É uma função e é possível atualizar os dados.
-    fetchMore
+    // Utilizada para paginação.
+    fetchMore,
+
+    // Variáveis utilizadas na ultima requisição.
+    // variables
+
+    // Verifica se já ocorrei uma query antes.
+    // called
 
     // startPolling e stopPolling - Ficam fazendo requisições várias vezes para 
     // o server para carregar os dados. Sendo mais fácil utilizar um subscribeToMore.
@@ -74,8 +82,13 @@ export function ClientList({ onSelectClient }) {
     // que estou pedindo aqui. Quando esta condição ocorrer então terei os dados aqui.
 
     fetchPolicy: 'cache-and-network',
+
+    // Set as variáveis do comando GraphQL.
     variables: {
+      // Quantidade inicial.
       skip: 0,
+
+      // Quantidade por página.
       take: PAGE_SIZE,
     },
   })
@@ -86,24 +99,46 @@ export function ClientList({ onSelectClient }) {
   // ??  - Se não tiver nenhum destes valores (data ou clients) retorne um
   //       array vazio.
   const clients = data?.clients.items ?? []
-  console.log(clients)
 
+  // Ao Click, permite editar o cliente.
   const handleSelectClient = (client) => () => onSelectClient?.(client.id)
 
+  // Recarrega os dados
   const handleLoadMore = () => {
+
     fetchMore({
+      // Quantidade por paginação.
       variables: {
+        // Quantidade existente.
         skip: data.clients.items.length,
+
+        // Quantidade a ser retornada.
         take: PAGE_SIZE,
       },
+
+      // Atualiza os dados 
+      // result - Dados anteriores
+      // fetchMoreResult - variáveis que estão vindo no fetchMore
+      //                   Vai trazer os dados da Query.
       updateQuery: (result, { fetchMoreResult }) => {
+        // Se não vier novos dados, retorne result.
         if (!fetchMoreResult) return result
 
+        // Se vier construa um novo result.
         return {
           ...result,
           clients: {
+            // spread
             ...result.clients,
+            
+            // Atualiza os itens. Concatenado os dados do array existentes
+            // com o novo array de dados.
             items: result.clients.items.concat(fetchMoreResult.clients.items),
+            
+            // Atualiza o total de itens.
+            // A raiz sempre é clients.
+            // Atualizando com o total de itens vindos na requisição
+            // do botão carregar mais.
             totalItems: fetchMoreResult.clients.totalItems,
           },
         }
@@ -135,7 +170,9 @@ export function ClientList({ onSelectClient }) {
           </li>
         ))}
       </ul>
-      <button type="button" disabled={loading} onClick={handleLoadMore}>Carregar mais</button>
+      <button type="button" disabled={loading} onClick={handleLoadMore}>
+        Carregar mais
+      </button>
     </section>
   )
 }
