@@ -271,7 +271,7 @@ mutation {
 }
 ```
 
-24 - 00:00
+25 - 05:22
 
 Ver
 https://dev.to/mensonones/consumindo-api-graphql-usando-react-e-apollo-client-4blo

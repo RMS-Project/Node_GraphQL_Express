@@ -8,6 +8,7 @@ import { ClientEdit } from "../components/ClientEdit"
 
 export default function Home() {
   // Guarda o Id do cliente quando houver click.
+  // Quando for necessário ser editado.
   const [clientId, setClientId] = useState()
 
   return (

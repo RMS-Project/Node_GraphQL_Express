@@ -1,4 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react'
+
+// useQuery - Carregar os dados detalhados um cliente.
+// useMutation - Atualizar os dados do cliente.
 import { useQuery, useMutation, gql } from '@apollo/client'
 // import gql from 'graphql-tag'
 
@@ -23,16 +26,23 @@ const UPDATE_CLIENT = gql`
 `
 
 export function ClientEdit({ clientId }) {
+
+  // Caso exista clientID - vai buscar os dados do cliente.
+  // data - É um objeto memorizado que causa um re-render do componente.
   const { data } = useQuery(CLIENT, {
     variables: {
       clientId,
     },
+
+    // Impede a execução da query caso clientId esteja vazio.
     skip: !clientId,
     fetchPolicy: 'cache-first',
   })
 
   const [updateClient] = useMutation(UPDATE_CLIENT)
 
+  // "data" será um valor memorizado que será utilizado pela
+  // função useMemo().
   const initialValues = useMemo(
     () => ({
       name: data?.client.name ?? '',
@@ -74,6 +84,7 @@ export function ClientEdit({ clientId }) {
     }).then(console.log)
   }
 
+  // Formulário apresentado quando for editar os dados de um cliente.
   return (
     <form onSubmit={handleSubmit}>
       <fieldset>

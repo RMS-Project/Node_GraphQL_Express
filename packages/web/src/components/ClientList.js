@@ -25,6 +25,9 @@ const GET_CLIENT_LIST = gql`
 // Quantidade de dados a ser retornado por página.
 const PAGE_SIZE = 10
 
+// onSelectClient - POde ser utilizado ou não.
+//                  Será chamado toda vez que for 
+//                  selecionado um cliente.
 export function ClientList({ onSelectClient }) {
   // Aqui pode-se utilizar as mesmas funções que temos no, método Query
   // que existe na instancia do Apollo Client.
@@ -101,6 +104,9 @@ export function ClientList({ onSelectClient }) {
   const clients = data?.clients.items ?? []
 
   // Ao Click, permite editar o cliente.
+  // onSelectClient? - Opcional.
+  // handleSelectClient - É uma query para o onclick da tag <li>.
+  // (client) => () => - Aceita vazio ou um cliente.
   const handleSelectClient = (client) => () => onSelectClient?.(client.id)
 
   // Recarrega os dados
@@ -164,6 +170,8 @@ export function ClientList({ onSelectClient }) {
     <section>
       <ul>
         {clients.map((client) => (
+          // Cada um dos Clientes receberá uma função handleSelectClient vazia.
+          // Que executará sob o ultimo cliente passado para a query.
           <li key={client.id} onClick={handleSelectClient(client)}>
             <p>{client.name}</p>
             <p>{client.email}</p>
