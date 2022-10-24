@@ -27,7 +27,7 @@ const UPDATE_CLIENT = gql`
 
 export function ClientEdit({ clientId }) {
 
-  // Caso exista clientID - vai buscar os dados do cliente.
+  // Caso exista clientId - vai buscar os dados do cliente.
   // data - É um objeto memorizado que causa um re-render do componente.
   const { data } = useQuery(CLIENT, {
     variables: {
@@ -36,6 +36,9 @@ export function ClientEdit({ clientId }) {
 
     // Impede a execução da query caso clientId esteja vazio.
     skip: !clientId,
+
+    // Fetch Policy - Ligada ao cache do navegador.
+    // Torna o carregamento mais rápido. "Como já tem no cache use o que está lá"
     fetchPolicy: 'cache-first',
   })
 
@@ -48,9 +51,10 @@ export function ClientEdit({ clientId }) {
       name: data?.client.name ?? '',
       email: data?.client.email ?? '',
     }),
-    [data]
+    [data] // Acontece toda vez que o data funcionar.
   )
 
+  // Estado controlável
   const [values, setValues] = useState(initialValues)
 
   useEffect(() => setValues(initialValues), [initialValues])
@@ -58,6 +62,7 @@ export function ClientEdit({ clientId }) {
   const handleNameChange = (event) => {
     event.persist()
 
+    // Campos que se deseja editar. 
     setValues((values) => ({
       ...values,
       name: event.target.value,
@@ -75,6 +80,8 @@ export function ClientEdit({ clientId }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    // Executa a atualização do cliente.
     updateClient({
       variables: {
         id: clientId,
@@ -97,3 +104,6 @@ export function ClientEdit({ clientId }) {
     </form>
   )
 }
+
+// Ver
+// State Manager
